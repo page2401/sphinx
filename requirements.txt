@@ -1,0 +1,9 @@
+sphinx==9.1.1
+myst-parser==5.2.0
+furo==2025.12.19
+sphinx-design==0.8.0
+sphinxcontrib-mermaid==2.1.1
+docutils==0.22.4
+markdown-it-py==4.3.0
+mdit-py-plugins==0.7.0
+pygments==2.21.0

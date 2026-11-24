@@ -1,0 +1,44 @@
+name: Deploy Sphinx (MyST + Furo) to page branch
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-sphinx
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install exact pinned Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build static site with Sphinx dirhtml builder
+        run: |
+          sphinx-build -b dirhtml . _build/dirhtml
+          touch _build/dirhtml/.nojekyll
+
+      - name: Publish static output to orphan page branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/dirhtml
+          publish_branch: page
+          force_orphan: true
+          commit_message: "deploy(page): build from ${{ github.sha }}"
