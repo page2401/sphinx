@@ -21,7 +21,7 @@ myst:
 | 图表指令扩展 | `sphinxcontrib-mermaid` | `2.1.1` | 解析 `` ```{mermaid} `` 指令并桥接本地 `_static/vendor/mermaid.min.js` (`12.3.0`) |
 | 数学排版引擎 | `sphinx.ext.mathjax` | `3.2.1` (Local) | 重定向 `mathjax_path = "vendor/tex-svg.js"` 至本地单文件 SVG 引擎，零 CDN 请求 |
 
-## 母版五大标准章节派生对照
+## 母版六大标准章节派生对照
 
 | 章节路径 | 测试维度 | 母版中立 GFM 语法 | Sphinx + MyST 派生改造与核心看点 |
 | :--- | :--- | :--- | :--- |
@@ -29,6 +29,7 @@ myst:
 | {doc}`02-diagrams` | 流程图与时序图 | ```` ```mermaid ```` 围栏代码块 | 科学出版风格 `` ```{mermaid} `` 指令（兼开 `myst_fence_as_directive` 兼容原样代码块）+ 本地 Mermaid `12.3.0` |
 | {doc}`03-math` | 数学公式排版 | `$...$` 与 `$$...$$` | **杀手级学术特性**：公式自动编号 `:label:` / `(eq-id)` 与 `{eq}` 跨段交叉引用 + 本地 MathJax 3 SVG |
 | {doc}`04-directory/index` | 目录结构与路由取舍 | `04-directory/index.md` + `nested/` | 强约束显式 `` ```{toctree} `` 编译树 + `{doc}` / `{ref}` 编译期死链强校验 + `dirhtml` 相对路径资产免 `basePath` |
+| {doc}`05-code-blocks` | 高阶代码块与语法高亮 | ```` ```ts ````、```` ```diff ````、平铺列表 | Docutils 标准 `` ```{code-block} `` 指令（`:caption:`、`:linenos:`、`:emphasize-lines:`、`:name:` 交叉引用）+ `sphinx-design` `{tab-set}` 标签页 |
 
 ```{toctree}
 :maxdepth: 2
@@ -39,4 +40,5 @@ myst:
 02-diagrams
 03-math
 04-directory/index
+05-code-blocks
 ```
